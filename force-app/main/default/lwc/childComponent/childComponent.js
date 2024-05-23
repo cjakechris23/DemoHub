@@ -1,27 +1,21 @@
-import { LightningElement,api } from 'lwc';
+import { LightningElement,api,track } from 'lwc';
 
 export default class ChildComponent extends LightningElement {
-    firstName='';
-    lastName='';
-    @api getValueFromParent;
-    
+    Name='';
 
-    handleChangeFirstName(event){
-        this.firstName = event.target.value;
-    }
-    handleChangeLastName(event){
-        this.lastName = event.target.value;
+    @api getValueFromParent;
+    @api recordId
+
+    handleChangeName(event){
+        this.Name = event.target.value;
     }
     handleClick(event){
         const searchEvent = new CustomEvent('getsearchevent',
         {detail: {
-            firstName: this.firstName,
-            lastName: this.lastName
+            Name: this.Name
         }});
         this.dispatchEvent(searchEvent);
     } 
-    handleClickParent(){
-       console.log(JSON.stringify(this.getValueFromParent.firstName));
-    }
+    
 }
 
