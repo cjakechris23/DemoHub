@@ -31,6 +31,7 @@ export default class BankAppGet extends LightningElement {
             theme: 'success', // a red theme intended for error states
             label: 'Update Details', // this is the header text
         });
+    
         this.editBankAccount = false;
         this.viewBankAccount = false;
     }
