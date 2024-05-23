@@ -1,0 +1,47 @@
+<template>
+    <lightning-card class title="Bank Accounts" icon-name="custom:custom63">
+        <template if:true={account}>
+            <ul class="slds-m-around_medium">
+                <h2 class="slds-card__header-title">
+                <lightning-record-view-form if:true={viewBankAccount} record-id={account.Id} object-api-name="BankAccount__c">
+                        <lightning-output-field field-name= "Name"></lightning-output-field>
+                        <lightning-output-field field-name= "Age__c"></lightning-output-field>
+                        <lightning-output-field field-name= "Amount__c"></lightning-output-field>
+                        <lightning-output-field field-name= "CreditCardNo__c"></lightning-output-field>
+                </lightning-record-view-form>
+                </h2>  
+                <lightning-record-edit-form if:true={editBankAccount} record-id={account.Id} object-api-name="BankAccount__c">
+                        <lightning-input-field field-name= "Name"></lightning-input-field>
+                        <lightning-input-field field-name= "Age__c"></lightning-input-field>
+                        <lightning-input-field field-name= "Amount__c"></lightning-input-field>
+                        <lightning-input-field field-name= "CreditCardNo__c"></lightning-input-field>
+                        <lightning-button
+                            class="slds-m-top_small"
+                            type="submit"
+                            name="update"
+                            label="Update"
+                            onclick={updateSuccessAlert}
+                            title="Click to update the bank account details"
+                            onmouseover={handleMouseOver}
+                            onmouseout={handleMouseOut}
+                        >
+                        </lightning-button>
+                </lightning-record-edit-form>
+                <div>
+                <lightning-record-view-form if:true={hoverMouseOver} record-id={account.Id} object-api-name="BankAccount__c">
+                    <lightning-output-field field-name= "Name"></lightning-output-field>
+                    <lightning-output-field field-name= "Age__c"></lightning-output-field>
+                    <lightning-output-field field-name= "Amount__c"></lightning-output-field>
+                    <lightning-output-field field-name= "CreditCardNo__c"></lightning-output-field>
+            </lightning-record-view-form>
+                </div>  
+            </ul>
+            <lightning-button label="View Bank Account" onclick={handleAddBankAccount}></lightning-button>
+            <lightning-button label="Edit Bank Account" onclick={handleEditBankAccount}></lightning-button>
+        </template>
+        <template if:false={account}>
+            <p class="slds-text-color_error">No account data available</p>
+        </template>
+    </lightning-card>
+</template>
+

@@ -1,0 +1,20 @@
+<!-- force-app/main/default/lwc/bankingApp/bankingApp.html -->
+<template>
+    <lightning-card title="Banking App" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <template if:true={account}>
+                <p>Name: {account.Name}</p>
+                <p>Balance: {account.Amount__c}</p>
+                <p>Card Number: {account.CreditCardNo__c}</p>
+                <p>Age: {account.Age__c}</p>
+
+                <lightning-input type="number" label="Amount" value={amount} onchange={handleAmountChange}></lightning-input>
+                <lightning-button label="Deposit" onclick={handleDeposit} variant="success"></lightning-button>
+                <lightning-button label="Withdraw" onclick={handleWithdraw} variant="destructive"></lightning-button>
+            </template>
+            <template if:true={error}>
+                <p>{error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
