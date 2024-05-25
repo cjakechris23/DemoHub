@@ -13,22 +13,6 @@ export default class HttpCat extends LightningElement {
     }
 
     getPlanetInfo(){
-       // Fetch Cat Status
-       this.statusCat ={};
-       fetch(HTTPCat)
-       .then(response => {
-           if(response.ok){
-               return response.blob();
-           } else {
-               throw new Error(response);
-           }
-       }).then(blob => {
-            this.imageURL = URL.createObjectURL(blob)
-           }
-       ).catch(error => {
-           console.error(error);
-       });
-
        // Fetch Jokes
        this.Info ={};
        fetch(Trivia)
