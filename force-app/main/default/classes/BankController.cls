@@ -1,10 +1,17 @@
-// force-app/main/default/classes/BankingAppController.cls
+/**
+ * @description       : For getting bank account information
+ * @author            : Jake Chris Delos Reyes
+ * @group             : 
+ * @last modified on  : 06-04-2024
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+**/
 public with sharing class BankController {
     @AuraEnabled(cacheable=true)
-    public static BankAccount__c getAccountById(Id accountId) {
-        return [SELECT Id, Name, Amount__c, CreditCardNo__c, Age__c FROM BankAccount__c WHERE Id = :accountId LIMIT 1];
+    public static List<BankAccount__c> getBankInfo(Id userId) {
+        return [SELECT Id, Name, Amount__c, CreditCardNo__c, Age__c FROM BankAccount__c WHERE OwnerId = :userId];
     }
 
+   
     @AuraEnabled
     public static BankAccount__c deposit(Id accountId, Decimal amount) {
         BankAccount__c acc = [SELECT Amount__c FROM BankAccount__c WHERE Id     = :accountId FOR UPDATE];
@@ -50,7 +57,7 @@ public with sharing class BankController {
     } catch (Exception e) {
         throw new AuraHandledException('Error: ' + e.getMessage());
     }
-}
+}   
+
 
 }
-
