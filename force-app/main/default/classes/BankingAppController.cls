@@ -1,8 +1,9 @@
 public with sharing class BankingAppController {
-
+    
     @AuraEnabled(cacheable=true)
     public static BankAccount__c getBankAccounts() {
     try {
+        Id userId = UserInfo.getUserId();
         // Assuming UserInfo.getUserId() to get the current user's ID  
         return [SELECT Id, Name, Amount__c, CreditCardNo__c FROM BankAccount__c LIMIT 1];
     } catch (Exception e) {
@@ -24,11 +25,11 @@ public with sharing class BankingAppController {
 
     @AuraEnabled
     public static void updateBankAccount(Id accountId, String name, Decimal amount, String creditCardNo) {
-        BankAccount__c accountToUpdate = [SELECT Id, Name, Amount__c, CreditCardNo__c FROM BankAccount__c WHERE Id = :accountId LIMIT 1];
+        Id userId = UserInfo.getUserId();
+        BankAccount__c accountToUpdate = [SELECT Id, Name, Amount__c, CreditCardNo__c FROM BankAccount__c WHERE OwnerId = :userId LIMIT 1];
         accountToUpdate.Name = name;
         accountToUpdate.Amount__c = amount;
         accountToUpdate.CreditCardNo__c = creditCardNo;
         update accountToUpdate;
     }
 }
-
